@@ -4,16 +4,14 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import express from "express";
 import { json } from "express";
 import cors from "cors";
-import dotenv from 'dotenv';
-dotenv.config();
 
 const app = express();
 app.use(json());
 app.use(cors());
 
 const MODEL_NAME = "gemini-1.5-flash";
-const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyD8NRYt6A80NQULBsTzC-_FuCF20cUSVsU';
-const PORT = process.env.PORT || 3000;
+const API_KEY = 'AIzaSyD8NRYt6A80NQULBsTzC-_FuCF20cUSVsU'; // API key is now directly hardcoded
+const PORT = 3000;
 
 let chatHistory = {}; // Store chat history for each session
 
@@ -68,8 +66,6 @@ async function queryGemini(queryText, chatHistory) {
     STRICTLY FOLLOW THIS!: THE OUTPUT SHOULD NOT EXCEED 40 WORDS, keep it short as the maxOutputToken is set to 40 so complete the reply within.
     IMPORTANT: All answers should be completed in two sentences only.
     DO NOT WRITE 'BOT:' in your reply.
-
-
 
     ${historyString}
   `;
